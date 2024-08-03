@@ -37,15 +37,27 @@ Skills
 ======
 * Language: C, python, matlab, julia
 * Tool: Latex, Git
-* Knowledge:
-  * Strong background in Physics, especially in the field of fluid dynamics
-  * Solid mathematical foundation, especially in the field of analysis
-  * Extensive research experience in the field of computational mathematics
-* Skill 3
+  
 
 Publications
 ======
   <ul>{% for post in site.publications reversed %}
     {% include archive-single-cv.html %}
   {% endfor %}</ul>
-  
+
+
+Awards/Honors(selected)
+======
+* National Scholarship 
+* Pacemaker to Merit Student 
+* The Chinese Mathematics Competitions (CMC) 
+(First prize, in the preliminary contest and the final contest)
+* China mechanics competition in honour of Zhou Peiyuan 
+First prize
+
+Language
+======
+toefl:104 reading:28 listening:27 speaking:24 writing:25
+GRE:326+3.5 verbal:156 quant:170 writing:3.5
+
+
