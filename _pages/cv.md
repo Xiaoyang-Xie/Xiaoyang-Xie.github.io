@@ -11,34 +11,36 @@ redirect_from:
 
 Education
 ======
-* Ph.D in Version Control Theory, GitHub University, 2018 (expected)
-* M.S. in Jekyll, GitHub University, 2014
-* B.S. in Theoretical and Applied Mechanics, Peking University, 2012
+* B.S. in Theoretical and Applied Mechanics, Peking University, 2025 (expected)
+* GPA: 3.88/4.00, 92/100 (Rank 1/37 in the Second Academic year)
 
-Work experience
+Research experience
 ======
-* Spring 2024: Academic Pages Collaborator
-  * Github University
-  * Duties includes: Updates and improvements to template
-  * Supervisor: The Users
+* Summer 2024:Research Assistant
+  * California Insititute of Technology
+  * Duties includes: Improve design of gravity wave parameterization in global climate model
+  * Advisor: Tapio Schneider
 
-* Fall 2015: Research Assistant
-  * Github University
-  * Duties included: Merging pull requests
-  * Supervisor: Professor Hub
+* 2023 - 2024: Research Assistant
+  * Peking University
+  * Duties included: Develop new shock-capturing schemes in CFD
+  * Advisor: Min Zhang
+  * Paper: An efficient fifth-order interpolation-based Hermite WENO scheme for hyperbolic conservation laws (in submission)
 
 * Summer 2015: Research Assistant
-  * Github University
-  * Duties included: Tagging issues
-  * Supervisor: Professor Git
+  * Peking University
+  * Duties included: Using Dynamic Mode Decomposition Method (DMD) to predict the systems' evolution
+  * Advisor: Shaoqiang Tang
+  * Paper: Regularized Dynamic Mode Decomposition Algorithm for Time Sequence Predictions (in submission)
   
 Skills
 ======
-* Skill 1
-* Skill 2
-  * Sub-skill 2.1
-  * Sub-skill 2.2
-  * Sub-skill 2.3
+* Language: C, python, matlab, julia
+* Tool: Latex, Git
+* Knowledge:
+  * Strong background in Physics, especially in the field of fluid dynamics
+  * Solid mathematical foundation, especially in the field of analysis
+  * Extensive research experience in the field of computational mathematics
 * Skill 3
 
 Publications
@@ -47,18 +49,3 @@ Publications
     {% include archive-single-cv.html %}
   {% endfor %}</ul>
   
-Talks
-======
-  <ul>{% for post in site.talks reversed %}
-    {% include archive-single-talk-cv.html  %}
-  {% endfor %}</ul>
-  
-Teaching
-======
-  <ul>{% for post in site.teaching reversed %}
-    {% include archive-single-cv.html %}
-  {% endfor %}</ul>
-  
-Service and leadership
-======
-* Currently signed in to 43 different slack teams
