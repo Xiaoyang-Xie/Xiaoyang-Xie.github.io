@@ -27,7 +27,9 @@ Academic interests
 ======
 Currently, my academic interests primarily lie at the intersection of applied and computational mathematics and fluid dynamics. I believe that mathematics, physics, and computation are reflections of nature at different levels, with a beautiful and deeply meaningful unity within them. I hope that by building on my academic foundation in these three areas, I can grasp their deeper unity, better understand nature, and advance technological development.
 
-Based on my research interests, in addition to completing the required physics courses in my major, I have also taken many interdisciplinary courses in computational and applied mathematics, such as numerical algebra, PDE, functional analysis, real analysis, machine learning, and others. Through these courses, I believe I have developed a solid mathematical foundation, which will provide a strong basis for my future research.
+Based on my research interests, in addition to completing the required physics courses in my major, I have also taken many interdisciplinary courses in computational and applied mathematics, such as numerical algebra, PDE, functional analysis, real analysis and others. Through these courses, I believe I have developed a solid mathematical foundation, which will provide a strong basis for my future research.
+
+I have also taken courses in the field of computer science, such as machine learning, data structures and algorithms, and mathematical logic. Additionally, I have accumulated extensive experience in programming and algorithm implementation through my research. I believe this will greatly benefit my future research as well.
 
 Research experience
 ======
