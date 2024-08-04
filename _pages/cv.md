@@ -19,7 +19,7 @@ Research experience
 * $\textbf{Summer 2024: Research Assistant}$
   * California Insititute of Technology
   * Duties includes: Improve design of gravity wave parameterization in global climate model
-  * Advisor: Tapio Schneider
+  * Advisor: Tapio Schneider, Zhaoyi Shen
 
 * $\textbf{2023 - 2024: Research Assistant}$
   * Peking University
@@ -41,19 +41,17 @@ Skills
 
 Publications
 ======
-  <ul>{% for post in site.publications reversed %}
-    {% include archive-single-cv.html %}
-  {% endfor %}</ul>
+1. $\textbf{An efficient fifth-order interpolation-based Hermite WENO scheme for hyperbolic conservation laws}$ (in submission)
+2. $\textbf{Regularized Dynamic Mode Decomposition Algorithm for Time Sequence Predictions}$ (in submission)
+
 
 
 Awards/Honors(selected)
 ======
 * $\textbf{National Scholarship}$
 * $\textbf{Pacemaker to Merit Student}$ 
-* $\textbf{The Chinese Mathematics Competitions (CMC)}$ 
-(First prize, in the preliminary contest and the final contest)
-* $\textbf{China mechanics competition in honour of Zhou Peiyuan}$ 
-（First prize）
+* $\textbf{First prize in The Chinese Mathematics Competitions (CMC)}$ (Both in the preliminary contest and the final contest)
+* $\textbf{First prize in the China mechanics competition in honour of Zhou Peiyuan}$
 
 Language
 ======
