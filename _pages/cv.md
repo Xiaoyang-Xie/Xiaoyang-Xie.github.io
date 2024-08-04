@@ -12,7 +12,7 @@ redirect_from:
 Education
 ======
 * **B.S.** in Theoretical and Applied Mechanics, Peking University, 2025 (expected)
-* **GPA**: 3.88/4.00, 92/100 (Rank　 1/37 in the Second Academic year)
+* **GPA**: 3.88/4.00, 92/100 (Rank 1/37 in the Second Academic year)
 
 Research experience
 ======
