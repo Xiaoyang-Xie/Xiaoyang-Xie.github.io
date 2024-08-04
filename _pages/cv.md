@@ -41,8 +41,8 @@ Skills
 
 Publications
 ======
-1. **An efficient fifth-order interpolation-based Hermite WENO scheme for hyperbolic conservation laws** (in submission)
-2. **Regularized Dynamic Mode Decomposition Algorithm for Time Sequence Predictions** (in submission)
+1. **An efficient fifth-order interpolation-based Hermite WENO scheme for hyperbolic conservation laws** (in submission, first author)
+2. **Regularized Dynamic Mode Decomposition Algorithm for Time Sequence Predictions** (in submission, first author)
 
 
 
