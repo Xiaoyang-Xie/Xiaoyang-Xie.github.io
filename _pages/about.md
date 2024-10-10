@@ -40,7 +40,7 @@ DMD is a data-driven method that extracts modes and their growth/decay rates fro
 
 The WENO scheme is an important high order shock-capturing method in computational fluid dynamics, and the HWENO scheme incorporates Hermite interpolation in WENO reconstruction, making the reconstruction template more compact but also leading to instability and increased computational complexity. Building on previous work, I improved the original HWENO scheme and proposed a more robust and efficient HWENO-I scheme. Another paper on this research is currently under review.
 
-Now, I am conducting summer research internship at the Clima lab at Caltech. I am currently working on improving the design of gravity wave parameterization in global climate model.
+In the last summmer, I have conducted a summer research internship at the Clima lab at Caltech, where I worked on improving the design of gravity wave parameterization in the global climate model. During my internship, I optimized the gravity wave spectrum by filtering out ineffective waves and integrated convection processes, improving model performance, especially in tropical regions. Additionally, I enhanced the parameterization of non-orographic gravity waves in global climate models by refactoring the overall code structure for better efficiency and GPU compatibility. 
 
 
 Hobbies
