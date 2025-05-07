@@ -7,7 +7,7 @@ redirect_from:
   - /about.html
 ---
 
-Hi, I am Xiaoyang Xie, an undergraduate stuent in Peking Uinversity, majoring in Theoretical and Applied mechanics. I am an incoming Ph.D. Student in Applied Mathematics at Princeton University.
+Hi, I am Xiaoyang Xie, an undergraduate student in Peking University, majoring in Theoretical and Applied mechanics. I am an incoming Ph.D. Student in Applied Mathematics at Princeton University.
 
 Personal information
 ======
