@@ -1,10 +1,10 @@
 ---
 title: "An efficient fifth-order interpolation-based Hermite WENO scheme for hyperbolic conservation laws"
 collection: publications
-permalink: /publication/2009-10-01-paper-title-number-1
-excerpt: 'This paper is about the number 1. The number 2 is left for future work.'
-date: 2009-10-01
-venue: 'Journal 1'
+permalink: https://www.sciencedirect.com/science/article/abs/pii/S0021999124009215
+excerpt: 'In this paper, we develop a simple, efficient, and fifth-order finite difference interpolation-based Hermite WENO (HWENO-I) scheme for one- and two-dimensional hyperbolic conservation laws. We directly interpolate the solution and first-order derivative values and evaluate the numerical fluxes based on these interpolated values. We do not need the split of the flux functions when reconstructing numerical fluxes and there is no need for any additional HWENO interpolation for the modified derivative. The HWENO interpolation only needs to be applied one time which utilizes the same candidate stencils, Hermite interpolation polynomials, and linear/nonlinear weights for the solution and first-order derivative at the cell interface, as well as the modified derivative at the cell center. The HWENO-I scheme inherits the advantages of the finite difference flux-reconstruction-based HWENO-R scheme, including fifth-order accuracy, compact stencils, arbitrary positive linear weights, and high resolution. The HWENO-I scheme is simpler and more efficient than the HWENO-R scheme and the previous finite difference interpolation-based HWENO scheme which needs the split of flux functions for the stability and upwind performance for the high-order derivative terms. Various benchmark numerical examples are presented to demonstrate the accuracy, efficiency, high resolution, and robustness of the proposed HWENO-I scheme.'
+date: 2025-02-15
+venue: 'Journal of Computational Physics'
 ---
 
 The contents above will be part of a list of publications, if the user clicks the link for the publication than the contents of section will be rendered as a full page, allowing you to provide more information about the paper for the reader. When publications are displayed as a single page, the contents of the above "citation" field will automatically be included below this section in a smaller font.
