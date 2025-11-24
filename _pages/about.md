@@ -7,23 +7,9 @@ redirect_from:
   - /about.html
 ---
 
-Hi, I am Xiaoyang Xie, an undergraduate student in Peking University, majoring in Theoretical and Applied mechanics. I am an incoming Ph.D. Student in Applied Mathematics at Princeton University.
+I am a PhD student in the Program in Applied and Computational Mathematics (PACM) at Princeton University.
 
-Personal information
-======
-Name:Xiaoyang Xie
-
-Mail:xiaoyangxie@stu.pku.edu.cn, xiaoyangxie@princeton.edu
-
-tell:18858928699(CHINA), 9012303632 (US)
-
-Educational Background
-======
-
-BS. Peking University 2021/09-2025/06(expected)
-
-College of Engineering, majoring in Theoretical and Applied mechanics
-
+I received my B.S. degree from the School of Engineering, Peking University in 2025.
 
 Academic Interests
 ======
@@ -39,6 +25,22 @@ More specifically, my research interests broadly lie in
 - Scientific Machine Learning
 
 Actively looking for discussions and possible collaborations on interesting topics.
+
+
+Contact information
+======
+
+Feel free to reach out to me at:
+
+Mail:xiaoyangxie@princeton.edu
+
+
+Publications
+======
+
+1. **X. Xie** and S. Tang, *“Regularized Dynamic Mode Decomposition Algorithm for Time Sequence Predictions,”* **Theoretical and Applied Mechanics Letters**, 2024. [[Official Version](https://www.sciencedirect.com/science/article/pii/S2095034924000667)]
+
+2. **X. Xie**, Z. Tao, C. Jiao and M. Zhang, *“An efficient fifth-order interpolation-based Hermite WENO scheme for hyperbolic conservation laws,”* **Journal of Computational Physics**, 2025. [[Official Version](https://www.sciencedirect.com/science/article/pii/S0021999124009215)]
 
 
 
