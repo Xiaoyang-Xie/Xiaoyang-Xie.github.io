@@ -24,15 +24,15 @@ author:
   avatar           : "photo.jpg"
   name             : "Xiaoyang Xie"
   pronouns         : # example: "she/her"  
-  bio              : "Peking University Undergraduate"
-  location         : "Earth"
-  employer         : "Peking University"
+  bio              : "Princeton University graduate students"
+  location         : "Princeton, NJ"
+  employer         : "Princeton University"
   uri              : # URL
-  email            : "xiaoyangxie@stu.pku.edu.cn" 
+  email            : "xiaoyangxie@princeton.edu" 
 
   # Academic websites
   arxiv            : # URL - Update with the correct link to your profile
-  googlescholar    : # URL
+  googlescholar    : "https://scholar.google.com/citations?user=td2YAw4AAAAJ&hl=zh-TW"
   impactstory      : # URL
   orcid            : # URL
   semantic         : # URL
