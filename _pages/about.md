@@ -44,12 +44,13 @@ Publications
 
 2. **X. Xie**, Z. Tao, C. Jiao and M. Zhang, *“An efficient fifth-order interpolation-based Hermite WENO scheme for hyperbolic conservation laws,”* **Journal of Computational Physics**, 2025. [[Official Version](https://www.sciencedirect.com/science/article/pii/S0021999124009215)]
 
+3. **X. Xie** and C. W. Rowley, *“Inertial Manifold Neural Operator for Dissipative Time-Dependent Partial Differential Equations,”* **arXiv preprint arXiv:2608.23546**, 2026. [[arXiv](https://arxiv.org/abs/2608.23546)]
+
 
 
 Hobbies
 ======
 
 I have many hobbies, including reading, board games, and walking. I have a wide range of literary interests, with my favorites being Camus's "The Plague," Yukio Mishima's "The Sea of Fertility," and Dostoevsky's "Crime and Punishment." I love board games, as they can build a coherent and complex game system with just a small rulebook, which fascinates me. I also enjoy walking, which helps me better understand the environment I am in and my inner state. During walks, my thoughts become more active, which helps me solve the problems I face.
-
 
 
