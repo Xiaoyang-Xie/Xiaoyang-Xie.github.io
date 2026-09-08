@@ -1,0 +1,8 @@
+Copyright (c) 2026 Xiaoyang Xie.
+
+The blog text and original scientific figures in this edition are licensed under Creative Commons Attribution 4.0 International (CC BY 4.0).
+https://creativecommons.org/licenses/by/4.0/
+
+Suggested attribution: Xiaoyang Xie, Range Geometry of Neural Operators (2026), version range-geometry-v1.0. Credit the author, link to the license, and indicate changes.
+
+The author portrait is included for identification and is excluded from this reuse license. Third-party works cited or linked from this article remain subject to their respective rights. The license does not cover the personal website's other content or theme.

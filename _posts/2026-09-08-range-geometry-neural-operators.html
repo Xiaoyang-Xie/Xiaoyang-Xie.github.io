@@ -1,0 +1,352 @@
+---
+layout: null
+title: "Range Geometry of Neural Operators"
+subtitle: "How Infinite-Dimensional Are Neural Operators?"
+date: 2026-09-08
+published: true
+permalink: /posts/2026/09/range-geometry-neural-operators/
+excerpt: "Three notions of dimension reveal different expressive capacities of neural operators through their range geometry."
+tags: [neural operators, operator learning, approximation theory, numerical experiments]
+---
+{% raw %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <link rel="canonical" href="https://xiaoyang-xie.github.io/posts/2026/09/range-geometry-neural-operators/">
+  <meta name="author" content="Xiaoyang Xie">
+  <meta name="description" content="Three notions of dimension reveal different expressive capacities of neural operators through their range geometry.">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Range Geometry of Neural Operators · Xiaoyang Xie</title>
+  <link rel="stylesheet" href="/assets/range-geometry-v1/styles.css?v=aecd14b12b">
+  <script>
+    window.MathJax = {
+      tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\\]']] },
+      options: { skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'] }
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+  <header class="masthead">
+    <div class="masthead__inner">
+      <a class="site-title" href="https://xiaoyang-xie.github.io/">Xiaoyang Xie's personal website</a>
+      <nav aria-label="Primary navigation">
+        <a href="https://xiaoyang-xie.github.io/blog/" aria-current="page">Blog</a>
+        <a href="#related-work">References</a>
+        <span class="preview-pill">Published · September 8, 2026</span>
+      </nav>
+    </div>
+  </header>
+
+  <div class="page-grid" id="top">
+    <aside class="author-card" aria-label="Author information">
+      <img src="/assets/range-geometry-v1/assets/author-photo.jpg" alt="Xiaoyang Xie">
+      <h2>Xiaoyang Xie</h2>
+      <p>Graduate Student</p>
+      <p>Princeton University</p>
+      <p>Princeton, NJ</p>
+      <div class="author-links">
+        <a href="mailto:xiaoyangxie@princeton.edu">✉ Email</a>
+        <a href="https://scholar.google.com/citations?user=td2YAw4AAAAJ" target="_blank" rel="noopener">◫ Google Scholar</a>
+      </div>
+    </aside>
+
+    <main class="article-shell">
+      <header class="article-header">
+        <h1>Range Geometry of Neural Operators</h1>
+        <p class="article-deck">How Infinite-Dimensional Are Neural Operators?</p>
+      </header>
+      <article class="article-body">
+        <p>Neural operators have become a major focus of <strong>scientific machine learning</strong>. They are commonly described as models that learn maps between function spaces. Although their outputs lie in an infinite-dimensional function space, the dimensions of the neural operators themselves admit a finer characterization.</p>
+<p>There is no single, context-independent notion of the dimension of an operator. We can characterize it through the geometry of its range. Let \(A\) be a compact set of admissible input functions, and let \(\widehat G_\theta\) be a continuous neural operator with fixed parameters \(\theta\). Its range \(Y=\widehat G_\theta(A)\) is the set of all output functions obtained as the input varies over \(A\). We can characterize \(Y\) using a hierarchy of dimensions:</p>
+<div class="math-block">\[
+\boxed{
+d_H(Y)
+\le d_{\mathrm{bott}}(Y)
+\le d_{\mathrm{lin}}(Y).
+}
+\]</div>
+<p>Here \(d_{\mathrm{lin}}\) is the minimum dimension of a closed linear space containing the range, \(d_{\mathrm{bott}}\) is the smallest Euclidean latent dimension admitting exact continuous encoding and Lipschitz decoding, and \(d_H\) is the Hausdorff dimension of the range. These dimensions need not agree, and their possible separations give four qualitatively different target regimes.</p>
+<p>Let \(G\) denote the target PDE solution operator on the same input set \(A\). The target dimensions are properties of \(G(A)\), and hence of the PDE operator together with the admissible input set. We use \(d_*\) to denote any one of the three dimensions above. Ideally, if \(d_*(G(A))=\infty\), we would like the model to achieve \(d_*(\widehat G_\theta(A))=\infty\) for a suitable choice of parameters \(\theta\). Can the neural operator achieve this with a fixed, finite architecture? Or can this dimension only become larger as we scale the architecture, while remaining finite for every finite model?</p>
+<p>Model names alone do not answer this question. Different architectures conventionally called neural operators may have different dimension-specific capacities. If \(d_*(G(A))=\infty\), but every finite model in the architecture family has \(d_*(\widehat G_\theta(A))&lt;\infty\), then no such model can represent \(G\) exactly on \(A\). To better illustrate these capacity mismatches, we construct several test cases for the linearized BBM equation whose operator ranges realize different dimension regimes. We compare the same representative learning architectures across these cases, and the observed performance patterns agree closely with the range geometries.</p>
+<h2 id="dimensions">1. Three questions about an output set</h2>
+<p>Let \(G:A\to H\) be a continuous operator on a compact input set \(A\), with outputs in a real Hilbert space \(H\), such as \(L^2\). Its range is the compact set</p>
+<div class="math-block">\[
+Y=G(A).
+\]</div>
+<p>The choice of \(A\) matters: the same PDE can produce a simple family of outputs for one input class and a much richer family for another. To describe the geometry of \(Y\) more precisely, we introduce three dimensions, each answering a different question about the output set.</p>
+<p><strong>How many linear directions are needed?</strong> The linear-span dimension is</p>
+<div class="math-block">\[
+d_{\mathrm{lin}}(Y)=\dim\overline{\operatorname{span}(Y)}.
+\]</div>
+<p>It counts the basis functions needed to contain every output exactly. A fixed-rank POD model or standard DeepONet reconstructs in such a linear space. This dimension depends on how the set sits in the ambient vector space, including the choice of origin.</p>
+<p><strong>How many coordinates permit exact nonlinear reconstruction?</strong> Define \(d_{\mathrm{bott}}(Y)\) as the smallest integer \(m\) for which there are maps</p>
+<div class="math-block">\[
+E:Y\to\overline B_2^m,\qquad
+D:\overline B_2^m\to H,\qquad
+D(E(y))=y,
+\]</div>
+<p>where \(\overline B_2^m=\{z\in\mathbb R^m:\|z\|_2\le1\}\) is the closed Euclidean unit ball, \(E\) is continuous, and \(D\) is Lipschitz. If no finite \(m\) works, the dimension is infinite. The encoder assigns coordinates continuously to each output, while the decoder's Lipschitz constant controls how errors in those coordinates affect reconstruction. Here we ask only whether exact reconstruction is possible with some finite Lipschitz constant. The related question of how a prescribed Lipschitz bound limits approximation accuracy is studied through Lipschitz widths by <a href="https://doi.org/10.1007/s00365-022-09576-3" target="_blank" rel="noopener">Petrova and Wojtaszczyk (2023)</a>.</p>
+<p><strong>How large is the set at small scales?</strong> Hausdorff dimension \(d_H(Y)\) measures the critical power at which sums of small covering diameters change from divergent to vanishing.</p>
+<p>Imagine covering \(Y\) with small balls, each grouping output functions that are close in norm. For a line segment, halving the ball radius requires roughly twice as many balls; for a smooth surface patch, it requires roughly four times as many. These correspond to dimensions one and two. Hausdorff dimension extends this intuition to irregular sets by allowing the covering balls to have different sizes and weighting their diameters by a power. It describes how much geometric detail the set contains at finer and finer scales. A smooth curve of outputs can have Hausdorff dimension one even if representing all of those outputs requires infinitely many linear basis functions.</p>
+<p>These questions are related:</p>
+<div class="math-block">\[
+\boxed{d_H(Y)\le d_{\mathrm{bott}}(Y)\le d_{\mathrm{lin}}(Y).}
+\]</div>
+<p>The reason is intuitive. Linear coordinates already provide a continuous encoder and a Lipschitz decoder. Allowing a nonlinear decoder can reduce the number of coordinates, but a Lipschitz map cannot turn an \(m\)-dimensional ball into a set of Hausdorff dimension greater than \(m\).</p>
+<p>Our focus here is on <strong>exact expressive power</strong>: the capacity of a model class to represent the target operator exactly over the entire input set. An infinite linear span can still have a very accurate low-rank approximation. And range geometry describes only the output representation: two operators can have the same range while assigning very different outputs to their inputs.</p>
+<h2 id="model-capacity">2. Expressive power of neural-operator architectures</h2>
+<p>We now apply the same dimensions to a model's output range, \(\widehat Y_\theta=\widehat G_\theta(A)\). We keep the architecture fixed and consider the <strong>continuum limit</strong>, as the number of sample points used to represent the input function \(u\) tends to infinity. At any fixed grid resolution, all three dimensions of the sampled output range are finite. The question is whether the architecture enforces a finite bound on each dimension that is independent of resolution.</p>
+<h3 id="linear-readout">2.1 Fixed linear reconstruction: POD-Net and DeepONet</h3>
+<p>A rank-\(p\) linear decoder has the form</p>
+<div class="math-block">\[
+\widehat G_\theta(a)=\sum_{j=1}^{p}c_{\theta,j}(a)\,\varphi_{\theta,j}.
+\]</div>
+<p>POD-Net fixes its output basis from training data. Standard DeepONet learns the basis through its trunk network (<a href="https://doi.org/10.1038/s42256-021-00302-5" target="_blank" rel="noopener">Lu et al., 2021</a>). Once the parameters are fixed, both reconstruct in one \(p\)-dimensional linear space.</p>
+<p>The dimension hierarchy therefore gives</p>
+<div class="math-block">\[
+d_H(\widehat Y_\theta)
+\le d_{\mathrm{bott}}(\widehat Y_\theta)
+\le d_{\mathrm{lin}}(\widehat Y_\theta)
+\le p&lt;\infty.
+\]</div>
+<p><strong>All three dimensions are finite</strong>, with a bound set by the decoder rank. Increasing the coefficient network cannot remove this output-space constraint. Related reconstruction-error bounds in terms of covariance spectra are given by <a href="https://doi.org/10.1093/imatrm/tnac001" target="_blank" rel="noopener">Lanthaler et al. (2022)</a>.</p>
+<h3 id="nonlocal-readout">2.2 Nonlocal Readout Neural Operators</h3>
+<p>A practical motivation for removing the final local term is exact enforcement of boundary conditions. <a href="https://arxiv.org/abs/2608.27256v1" target="_blank" rel="noopener">Stuart and Trautner (2026)</a> construct an NNO whose final hidden layer uses Dirichlet Laplacian eigenfunctions, so that the output satisfies homogeneous Dirichlet boundary conditions independently of training.</p>
+<p>We use their NNO definition and notation (Definition 2.1):</p>
+<div class="math-block">\[
+\Psi(a)=\mathcal Q\circ\mathcal L_L\circ\cdots\circ\mathcal L_1\circ\mathcal R(a),
+\]</div>
+<p>where each hidden layer is given by their Eq. (2.3):</p>
+<div class="math-block">\[
+\begin{aligned}
+(\mathcal L_\ell v)(x)
+=\sigma\Biggl(&amp;W_\ell v(x)+b_\ell\\
+&amp;+\sum_{m=1}^{M}
+\langle T_{\ell,m}v,\psi_{\ell,m}\rangle_{L^2(\Omega;\mathbb R^{d_c})}
+\phi_{\ell,m}(x)\Biggr).
+\end{aligned}
+\]</div>
+<p>Here \(\Psi\) denotes the model \(\widehat G_\theta\) in the paper's notation, and \(d_c\) is the channel width. The lifting acts as \(\mathcal R:u(x)\mapsto R(u(x),x)\), and the projection as \(\mathcal Q:v(x)\mapsto Q(v(x))\). The inner products extract scalar coefficients, while the functions \(\phi_{\ell,m}\) reconstruct the spatial field. Their choice is not restricted to Fourier modes.</p>
+<p>We call the subclass with \(W_L=0\) a <strong>Nonlocal Readout Neural Operator (NR-NO)</strong>. Earlier hidden layers may retain their local terms. The boundary-enforcing construction additionally sets \(b_L=0\), takes \(\sigma(0)=Q(0)=0\), and uses Dirichlet eigenfunctions in the final layer (<a href="https://arxiv.org/abs/2608.27256v1" target="_blank" rel="noopener">Stuart &amp; Trautner, 2026</a>, Corollary 3.6 and Section 4.1). Thus the final local matrix vanishes while the nonlocal term remains active.</p>
+<p>For the dimension estimate, assume continuous layers and Lipschitz final activation and projection, as in the GELU implementation. With \(W_L=0\), the final pre-activation lies in the affine space \(b_L+\operatorname{span}\{\phi_{L,1},\ldots,\phi_{L,M}\}\), whose dimension is at most \(M\). Lipschitz maps cannot increase upper box-counting dimension, so</p>
+<div class="math-block">\[
+d_H(\widehat Y_\theta)
+\le\overline{\dim}_B(\widehat Y_\theta)
+\le M.
+\]</div>
+<p>If the model is injective on \(A\), one can further prove that its bottleneck dimension is finite: <strong>\(d_{\mathrm{bott}}(\widehat Y_\theta)\le M&lt;\infty\)</strong>.</p>
+<p>Having finitely many reconstruction coordinates does not mean that all outputs lie in a finite-dimensional linear space. Here the coefficients pass through a nonlinear activation and projection, rather than simply weighting a fixed set of output basis functions. As the coefficients vary, this nonlinear reconstruction can produce a family whose exact linear representation requires infinitely many basis functions. Consequently, <strong>\(d_{\mathrm{lin}}\) can be infinite</strong>, even when the other two dimensions are finite.</p>
+<p>These bounds are independent of sampling resolution. They are consistent with the universal approximation result of <a href="https://arxiv.org/abs/2608.27256v1" target="_blank" rel="noopener">Stuart and Trautner (2026)</a>, which allows the architecture to grow with the desired accuracy. The broader roles of nonlocality and nonlinearity in universal approximation are analyzed by <a href="https://doi.org/10.1007/s00365-025-09718-3" target="_blank" rel="noopener">Lanthaler et al. (2025)</a>.</p>
+<h3 id="adaptive-sparse">2.3 STFNO: a constructed example</h3>
+<p>We deliberately construct an additional neural operator for this comparison. Its purpose is to realize a distinctive range geometry: <strong>\(d_{\mathrm{bott}}\) can be infinite while \(d_H\) remains finite</strong>. We call this model the <strong>Sequentially Thresholded Fourier Neural Operator (STFNO)</strong>.</p>
+<p>Work in \(H=L^2(\mathbb T;\mathbb R)\), where \(\mathbb T=\mathbb R/\mathbb Z\). For each positive frequency \(k\), use the orthonormal basis functions \(\psi_k^c(x)=\sqrt2\cos(2\pi kx)\) and \(\psi_k^s(x)=\sqrt2\sin(2\pi kx)\). Write the corresponding input coefficients as \(a_k=\langle u,\psi_k^c\rangle\) and \(b_k=\langle u,\psi_k^s\rangle\). The constant frequency has \(\psi_0^c=1\), \(a_0=\langle u,1\rangle\), and \(b_0=\psi_0^s=0\).</p>
+<p><strong>We select frequencies together with their cosine–sine pairs.</strong> Let \(s\) be the maximum number of active frequencies. Set \(\rho_k=(a_k^2+b_k^2)^{1/2}\), and let \(\tau_s\) be the \((s+1)\)-st largest value of \(\rho_k\), or zero if at most \(s\) are nonzero. Apply the group threshold</p>
+<div class="math-block">\[
+(\widetilde a_k,\widetilde b_k)
+=\left(1-\frac{\tau_s}{\rho_k}\right)_+(a_k,b_k),
+\qquad (t)_+=\max\{t,0\},
+\]</div>
+<p>with the output defined as \((0,0)\) when \(\rho_k=0\).</p>
+<p>At most \(s\) frequencies survive. Both coefficients shrink by the same factor, preserving their relative phase. This threshold is continuous, including at ties, and preserves inputs that already use at most \(s\) frequencies.</p>
+<p>Reconstruct \(v(x)=\sum_k[\widetilde a_k\psi_k^c(x)+\widetilde b_k\psi_k^s(x)]\). List the surviving frequencies as \(k_1&lt;\cdots&lt;k_\ell\), where \(\ell\le s\), and form two vectors:</p>
+<div class="math-block">\[
+\begin{aligned}
+\mathbf a(v)&amp;=(\widetilde a_{k_1},\widetilde b_{k_1},\ldots,\widetilde a_{k_\ell},\widetilde b_{k_\ell}),\\
+\mathbf p_v(x)&amp;=(\psi_{k_1}^c(x),\psi_{k_1}^s(x),\ldots,\psi_{k_\ell}^c(x),\psi_{k_\ell}^s(x)).
+\end{aligned}
+\]</div>
+<p>Pad both vectors with zeros to length \(2s\). The pointwise decoder is</p>
+<div class="math-block">\[
+\widehat G_\theta(u)(x)
+=\alpha_\theta v(x)+f_\theta\bigl(v(x),\mathbf a(v),\mathbf p_v(x)\bigr),
+\]</div>
+<p>where \(\alpha_\theta\) is a learned scalar and \(f_\theta\) is an MLP. With \(s=4\), the MLP receives one reconstructed value, eight real coefficients, and eight matching basis values.</p>
+<p>With \(N\) equally spaced sample points, the real FFT computes \(\lfloor N/2\rfloor+1\) frequency modes. As \(N\to\infty\), infinitely many Fourier basis functions become available, but <strong>at most four frequencies are active for any one input</strong> in our implementation.</p>
+<p>For each fixed choice of frequencies, the output depends Lipschitz-continuously on at most \(2s\) real coefficients. There are countably many frequency choices, so the countable-union property of Hausdorff dimension gives <strong>\(d_H(\widehat Y_\theta)\le2s=8\)</strong>.</p>
+<p>Both \(d_{\mathrm{lin}}\) and \(d_{\mathrm{bott}}\) can nevertheless be infinite. Set \(\alpha_\theta=1\) and \(f_\theta=0\), and consider a compact family of single-mode inputs whose amplitudes shrink sufficiently slowly across infinitely many Fourier modes. The model preserves that family exactly, giving</p>
+<div class="math-block">\[
+d_{\mathrm{lin}}(\widehat Y_\theta)
+=d_{\mathrm{bott}}(\widehat Y_\theta)=\infty,
+\qquad d_H(\widehat Y_\theta)&lt;\infty.
+\]</div>
+<p>This separation is why we include this deliberately constructed model.</p>
+<h3 id="pointwise-path">2.4 General NNOs</h3>
+<p>Here we consider the NNO defined in Section 2.2 as a map from \(H\) to itself, without requiring \(W_L=0\).</p>
+<p>The key observation is that <strong>a suitable choice of parameters makes this NNO the identity operator</strong>. We can set the nonlocal terms to zero and transmit the input through the pointwise paths. For the GELU activation \(\gamma\), the relation \(\gamma(t)-\gamma(-t)=t\) lets two channels carry and reconstruct the input exactly. Thus</p>
+<div class="math-block">\[
+\widehat G_\theta(u)=u,
+\qquad \widehat Y_\theta=\widehat G_\theta(A)=A.
+\]</div>
+<p>The output range therefore has <strong>exactly the same three dimensions as the input set</strong>. Choose a compact input set \(A\) with infinite Hausdorff dimension. The dimension hierarchy makes its bottleneck and linear-span dimensions infinite as well, and the identity NNO preserves all three:</p>
+<div class="math-block">\[
+d_H(\widehat Y_\theta)
+=d_{\mathrm{bott}}(\widehat Y_\theta)
+=d_{\mathrm{lin}}(\widehat Y_\theta)=\infty.
+\]</div>
+<p>Hence all three range dimensions can be infinite even with a fixed architecture. General NNOs impose no finite upper bound on any of these dimensions.</p>
+<h2 id="four-classes">3. Four geometries that separate the questions</h2>
+<p>We now explicitly construct four compact sets, each representing a different combination of finite and infinite values of \(d_{\mathrm{lin}}\), \(d_{\mathrm{bott}}\), and \(d_H\). All four constructions use the periodic domain \(\mathbb T=\mathbb R/\mathbb Z\) and the orthonormal Fourier modes \(e_n(x)=\sqrt2\cos(2\pi nx)\).</p>
+<div class="table-wrap"><table><thead><tr><th>Class</th><th>Example</th><th>\(d_{\mathrm{lin}}\)</th><th>\(d_{\mathrm{bott}}\)</th><th>\(d_H\)</th></tr></thead><tbody><tr><td>I</td><td>A rectangle</td><td>2</td><td>2</td><td>2</td></tr><tr><td>II</td><td>A translating pulse</td><td>\(\infty\)</td><td>2</td><td>1</td></tr><tr><td>III</td><td>A union of shrinking line segments</td><td>\(\infty\)</td><td>\(\infty\)</td><td>1</td></tr><tr><td>IV</td><td>A weighted Hilbert cube</td><td>\(\infty\)</td><td>\(\infty\)</td><td>\(\infty\)</td></tr></tbody></table></div>
+<figure class="geometry-figure" id="geometry-figure"><a href="/assets/range-geometry-v1/assets/four-geometries.svg?v=15653ed6a2" target="_blank"><img src="/assets/range-geometry-v1/assets/four-geometries.svg?v=15653ed6a2" alt="Four schematic views of the output sets; each line segment in III follows an orthogonal Fourier mode." loading="lazy"></a><figcaption>Four schematic views of the output sets; each line segment in III follows an orthogonal Fourier mode.</figcaption></figure>
+<h3 id="class-i">3.1 Class I: two coefficients are enough</h3>
+<p>Take all functions \((z_1e_1+z_2e_2)/\sqrt2\) with \(z_1,z_2\in[-1,1]\). The output set is a rectangle in a two-dimensional linear space. Two coefficients describe it exactly, with linear and stable reconstruction.</p>
+<p>This is the calibration case: the representation need not do anything beyond recover a few coefficients.</p>
+<h3 id="class-ii">3.2 Class II: one moving shape, infinitely many linear directions</h3>
+<p>Fix the shape parameter at \(\beta=16\) and consider the translated periodic bump</p>
+<div class="math-block">\[
+q_\phi(x)=C_\beta
+\exp\!\left[\beta\bigl(\cos 2\pi(x-\phi)-1\bigr)\right],
+\qquad \phi\in\mathbb T.
+\]</div>
+<p>We choose the normalization constant</p>
+<div class="math-block">\[
+C_\beta=
+\left(\int_0^1
+\exp\!\left[2\beta\bigl(\cos 2\pi x-1\bigr)\right]\,dx
+\right)^{-1/2},
+\qquad C_{16}\approx3.758119.
+\]</div>
+<p>This gives \(\|q_\phi\|_{L^2(\mathbb T)}=1\) for every \(\phi\). The set \(K_{\mathrm{II}}=\{q_\phi:\phi\in\mathbb T\}\) is a smooth closed curve in function space. It has Hausdorff dimension one, while its nonzero Fourier content at arbitrarily high frequencies gives it an infinite linear span.</p>
+<p>We can prove that \(d_{\mathrm{bott}}(K_{\mathrm{II}})=2\). The two coordinates \((\cos2\pi\phi,\sin2\pi\phi)\) continuously represent the pulse position and allow Lipschitz reconstruction of the pulse. The circular topology prevents a continuous one-to-one representation by a single real coordinate.</p>
+<p>The useful distinction is between <strong>many linear directions</strong> and <strong>few nonlinear coordinates</strong>. A moving shape can require the former while admitting the latter. This distinction motivates nonlinear decoders such as NOMAD (<a href="https://proceedings.neurips.cc/paper_files/paper/2022/hash/24f49b2ad9fbe65eefbfd99d6f6c3fd2-Abstract-Conference.html" target="_blank" rel="noopener">Seidman et al., 2022</a>); related advantages for transport-dominated PDEs are analyzed by <a href="https://openreview.net/forum?id=CrfhZAsJDsZ" target="_blank" rel="noopener">Lanthaler et al. (2023)</a>.</p>
+<h3 id="class-iii">3.3 Class III: one-dimensional pieces can be hard to organize</h3>
+<p>Now construct a set by taking a line segment along each orthogonal Fourier mode, with lengths that shrink slowly:</p>
+<div class="math-block">\[
+K_{\mathrm{III}}=\{0\}\cup\bigcup_{n\ge2}[0,a_ne_n],
+\qquad a_n=(\log(n+1))^{-1/4}.
+\]</div>
+<p>Each function in \(K_{\mathrm{III}}\) has the form \(t e_n\), with \(0\le t\le a_n\), so it uses at most one Fourier mode. Since \(a_n\to0\), the set is compact. It has Hausdorff dimension one because it is a countable union of line segments, but infinite linear-span dimension because it contains infinitely many orthogonal modes.</p>
+<p>At a small scale \(\varepsilon\), roughly \(\exp(c\varepsilon^{-4})\) of the endpoints \(a_ne_n\) can be distinguished from one another. A Lipschitz decoder acting on a bounded subset of \(\mathbb R^m\) can produce only polynomially many distinguishable outputs at that scale. Comparing these growth rates, we can prove \(d_{\mathrm{bott}}(K_{\mathrm{III}})=\infty\).</p>
+<h3 id="class-iv">3.4 Class IV: many coordinates vary together</h3>
+<p>Finally, consider</p>
+<div class="math-block">\[
+K_{\mathrm{IV}}
+=\left\{\sum_{n\ge1}n^{-0.51}z_ne_n:\ |z_n|\le1\right\}.
+\]</div>
+<p>The squared weights are summable, which keeps the set compact. Each function in this set can use many independent Fourier modes simultaneously.</p>
+<p>For every \(N\), the set contains an \(N\)-dimensional rectangle. Its Hausdorff dimension is therefore at least every finite \(N\), hence infinite. All three dimensions are infinite.</p>
+<h3 id="model-geometry">3.5 Matching model capacity to the four geometries</h3>
+<p>We can now compare the model bounds with the four output geometries. For exact representation of the continuous, injective targets considered here, the comparison is:</p>
+<div class="table-wrap"><table><thead><tr><th>Architecture</th><th>Class I</th><th>Class II</th><th>Class III</th><th>Class IV</th></tr></thead><tbody><tr><td>POD-Net / DeepONet</td><td>Compatible</td><td>Mismatch</td><td>Mismatch</td><td>Mismatch</td></tr><tr><td>NR-NO (fixed \(M\))</td><td>Compatible</td><td>Compatible</td><td>Mismatch</td><td>Mismatch</td></tr><tr><td>STFNO (fixed frequency budget)</td><td>Compatible</td><td>Compatible</td><td>Compatible</td><td>Mismatch</td></tr><tr><td>General NNO</td><td>Compatible</td><td>Compatible</td><td>Compatible</td><td>Compatible</td></tr></tbody></table></div>
+<p>Here <strong>compatible</strong> means that the stated dimension bounds do not rule out exact representation. A <strong>mismatch</strong> means that at least one of the three target range dimensions is infinite, while the corresponding architectural bound forces the model range dimension to remain finite.</p>
+<h2 id="bbm">4. Numerical Experiments</h2>
+<p>We use the four sets \(K_{\mathrm{I}},\ldots,K_{\mathrm{IV}}\) from Section 3 as four families of <strong>input initial conditions</strong>. For each input \(u=u(\cdot,0)\), the target \(G_1u=u(\cdot,1)\) is its solution at time \(t=1\) under the periodic linearized BBM equation:</p>
+<div class="math-block">\[
+\begin{gathered}
+u_t+u_x-u_{xxt}=0,
+\\[4pt]
+\widehat{G_1u}(k)
+=\exp\!\left[-i\frac{2\pi k}{1+(2\pi k)^2}\right]\widehat u(k).
+\end{gathered}
+\]</div>
+<p>Every Fourier multiplier has modulus one, so \(G_1\) is an invertible linear isometry on \(L^2(\mathbb T)\): it preserves both distances and linear dependence. Consequently, for each input set \(K_j\), the output range \(G_1(K_j)\) has exactly the same three dimensions:</p>
+<div class="math-block">\[
+d_*\bigl(G_1(K_j)\bigr)=d_*(K_j),
+\qquad *\in\{\mathrm{lin},\mathrm{bott},H\}.
+\]</div>
+<p>Thus the four dimension combinations in Section 3 also hold for the corresponding BBM output ranges. We sample inputs from finite-resolution versions of these sets and compute their targets directly from the Fourier formula above, then compare POD-Net, DeepONet, W0-FNO, STFNO, and FNO on the resulting input–output pairs.</p>
+<p>The pilot uses a 1024-point grid, 4096/512/1024 train/validation/test samples, and seed 0. POD-Net and DeepONet have output rank 8. Our implementation of FNO (<a href="https://openreview.net/forum?id=c8P9NQVtmnO" target="_blank" rel="noopener">Li et al., 2021</a>) has four blocks, width 32, and retained rFFT bins \(k=0,\ldots,7\). The Fourier implementation of NR-NO is called <strong>W0-FNO</strong>: it removes only the final local \(W\) path and keeps the same nonlinear output projection. STFNO uses the four-frequency threshold with a pointwise MLP of three hidden layers, width 64, and GELU activations. It has 9,538 trainable parameters, compared with 72,001 for FNO. We keep this configuration fixed across all four cases and use the same data splits, optimizer settings, and validation-based checkpoint selection for all five models.</p>
+<p>All errors below are mean per-sample relative \(L^2\) test errors, reported as percentages. For Cases III and IV, each value of \(N\) has separately trained models, with the grid resolution and architecture held fixed.</p>
+<h3 id="case-i-results">4.1 Case I: two independent coefficients</h3>
+<p>Inputs are combinations of the first two Fourier modes, as in Section 3.1. The BBM output remains in a two-dimensional linear space, so none of the five architectures is ruled out by the dimension bounds.</p>
+<div class="table-wrap"><table><thead><tr><th>Model</th><th>Mean test error</th></tr></thead><tbody><tr><td>POD-Net</td><td>0.071%</td></tr><tr><td>DeepONet</td><td>0.077%</td></tr><tr><td>W0-FNO</td><td>0.085%</td></tr><tr><td>STFNO</td><td>0.120%</td></tr><tr><td>FNO</td><td>0.112%</td></tr></tbody></table></div>
+<figure><a href="/assets/range-geometry-v1/assets/case-i-results.svg?v=0af130cdd7" target="_blank"><img src="/assets/range-geometry-v1/assets/case-i-results.svg?v=0af130cdd7" alt="Case I: mean relative L2 test errors for the five models." loading="lazy"></a><figcaption>Case I: mean relative L2 test errors for the five models.</figcaption></figure>
+<p>All five models achieve errors of about 0.12% or less. STFNO reaches 0.120%. Here the target range has low linear-span dimension (\(d_{\mathrm{lin}}=2\)), so the rank-8 linear decoders already have enough output directions. In this setting, the results show no accuracy advantage from nonlinear reconstruction.</p>
+<h3 id="case-ii-results">4.2 Case II: a translating pulse</h3>
+<p>Inputs are translated copies of the normalized pulse. Its output family has an infinite linear span but bottleneck dimension two.</p>
+<div class="table-wrap"><table><thead><tr><th>Model</th><th>Mean test error</th></tr></thead><tbody><tr><td>POD-Net</td><td>39.614%</td></tr><tr><td>DeepONet</td><td>39.699%</td></tr><tr><td>W0-FNO</td><td>0.111%</td></tr><tr><td>STFNO</td><td>0.286%</td></tr><tr><td>FNO</td><td>0.048%</td></tr></tbody></table></div>
+<figure><a href="/assets/range-geometry-v1/assets/case-ii-results.svg?v=1d1c72ccff" target="_blank"><img src="/assets/range-geometry-v1/assets/case-ii-results.svg?v=1d1c72ccff" alt="Case II: mean relative L2 test errors for the five models, on a logarithmic scale." loading="lazy"></a><figcaption>Case II: mean relative L2 test errors for the five models, on a logarithmic scale.</figcaption></figure>
+<p>POD-Net and DeepONet both have about 39.6% error, close to the 39.614% mean error from projection onto the training-POD space. Their fixed rank limits how well they can reconstruct the moving shape.</p>
+<p>W0-FNO and FNO reach 0.111% and 0.048%, respectively. Low-frequency coefficients can carry the pulse position, allowing a nonlinear decoder to reconstruct the translated pulse. This is consistent with the low bottleneck dimension of the pulse family. STFNO reaches 0.286%. Its error remains higher than those of W0-FNO and FNO, illustrating that compatible range dimensions alone do not determine prediction accuracy.</p>
+<h3 id="case-iii-results">4.3 Case III: one active Fourier mode per input</h3>
+<p>For each \(N\), inputs use one of the Fourier modes \(k=2,\ldots,N\), with the shrinking amplitudes from Section 3.3. Increasing \(N\) introduces more possible modes while each input still uses only one. The figure shows all tested values of \(N\); the table lists three representative settings.</p>
+<div class="table-wrap"><table><thead><tr><th>Model</th><th>\(N=8\)</th><th>\(N=64\)</th><th>\(N=256\)</th></tr></thead><tbody><tr><td>POD-Net</td><td>0.130%</td><td>86.762%</td><td>96.510%</td></tr><tr><td>DeepONet</td><td>0.427%</td><td>89.376%</td><td>97.257%</td></tr><tr><td>W0-FNO</td><td>14.320%</td><td>90.075%</td><td>97.276%</td></tr><tr><td>STFNO</td><td>1.519%</td><td>0.710%</td><td>0.313%</td></tr><tr><td>FNO</td><td>0.359%</td><td>0.563%</td><td>0.245%</td></tr></tbody></table></div>
+<figure><a href="/assets/range-geometry-v1/assets/case-iii-results.svg?v=cceceeb3bb" target="_blank"><img src="/assets/range-geometry-v1/assets/case-iii-results.svg?v=cceceeb3bb" alt="Case III: five-model test errors as N increases. The dotted line marks N=8, the first mode outside the FNO nonlocal cutoff." loading="lazy"></a><figcaption>Case III: five-model test errors as N increases. The dotted line marks N=8, the first mode outside the FNO nonlocal cutoff.</figcaption></figure>
+<p>POD-Net and DeepONet deteriorate as the number of possible modes exceeds their output rank. W0-FNO deteriorates earlier: its error rises from 0.056% at \(N=7\) to 14.320% at \(N=8\). This jump is consistent with its final nonlocal readout losing the first unretained isolated mode.</p>
+<p>In comparison, STFNO and FNO, both compatible with this case’s range geometry, achieve low mean test errors: 0.313% and 0.245%, respectively, at \(N=256\).</p>
+<h3 id="case-iv-results">4.4 Case IV: many Fourier modes vary together</h3>
+<p>Inputs now contain all modes \(k=1,\ldots,N\), with independently varying coefficients weighted by \(k^{-0.51}\), as in Section 3.4. Increasing \(N\) increases the number of coefficients that can vary simultaneously.</p>
+<div class="table-wrap"><table><thead><tr><th>Model</th><th>\(N=8\)</th><th>\(N=64\)</th><th>\(N=256\)</th></tr></thead><tbody><tr><td>POD-Net</td><td>0.399%</td><td>65.735%</td><td>74.752%</td></tr><tr><td>DeepONet</td><td>0.193%</td><td>65.700%</td><td>74.678%</td></tr><tr><td>W0-FNO</td><td>0.781%</td><td>37.970%</td><td>59.666%</td></tr><tr><td>STFNO</td><td>40.421%</td><td>73.216%</td><td>79.932%</td></tr><tr><td>FNO</td><td>0.184%</td><td>0.554%</td><td>0.505%</td></tr></tbody></table></div>
+<figure><a href="/assets/range-geometry-v1/assets/case-iv-results.svg?v=20f679ab6c" target="_blank"><img src="/assets/range-geometry-v1/assets/case-iv-results.svg?v=20f679ab6c" alt="Case IV: five-model test errors as N increases. The grid resolution and model architectures remain fixed." loading="lazy"></a><figcaption>Case IV: five-model test errors as N increases. The grid resolution and model architectures remain fixed.</figcaption></figure>
+<p>As in Case III, POD-Net, DeepONet, and W0-FNO deteriorate as \(N\) increases. STFNO also deteriorates in this case, consistent with a mismatch in Hausdorff dimension: the full target range has infinite Hausdorff dimension, whereas STFNO's is bounded by eight. In contrast, FNO maintains a low mean test error of 0.505% at \(N=256\).</p>
+<h2 id="conclusion">5. Conclusion</h2>
+<p>Neural operators are usually described as maps between infinite-dimensional function spaces. The discussion above shows that their expressive power admits a finer characterization through the geometry of their output ranges. Linear-span, bottleneck, and Hausdorff dimensions reveal different architectural constraints. Comparing these capacities with the target range gives us a way to assess, before training, whether a model has the representation needed for a particular family of problems.</p>
+<p>This is a statement about <strong>theoretical expressive power</strong>. It does not account for optimization or determine which model will perform best on a specific problem. An FNO that can realize a range of infinite Hausdorff dimension may still perform worse on a challenging task than a model whose range dimensions are necessarily finite. Greater expressive capacity alone does not guarantee that training will find an accurate operator.</p>
+<p>A dimension mismatch can make high accuracy expensive: the model may need substantially more capacity to approximate a target range whose corresponding dimension is infinite. For DeepONet and POD-Net, this can mean using many more output basis functions. A concrete example is the advection of discontinuous box waves studied by <a href="https://openreview.net/forum?id=CrfhZAsJDsZ" target="_blank" rel="noopener">Lanthaler et al. (2023)</a>. For linear reconstruction with \(p\) output basis functions and uniformly bounded predictions, the mean \(L^1\) error is bounded below by \(c/p\), with \(c&gt;0\) independent of \(p\). Reaching error \(\varepsilon\) therefore requires at least order \(\varepsilon^{-1}\) basis functions. In contrast, they construct FNOs attaining the same error with only order \(\log^2(\varepsilon^{-1})\) parameters.</p>
+<p><strong>Analyzing a neural operator's range geometry before using it is therefore a useful first step.</strong> It helps us identify structural mismatches early and decide which aspects of the model need to scale, before investing in optimization.</p>
+<p><em>An arXiv preprint on this work is coming soon.</em></p>
+<h2 id="related-work">References</h2>
+<p class="reference-entry">Lanthaler, S., Li, Z., &amp; Stuart, A. M. (2025). Nonlocality and nonlinearity implies universality in operator learning. <em>Constructive Approximation, 62</em>(2), 261–303. <a href="https://doi.org/10.1007/s00365-025-09718-3" target="_blank" rel="noopener">https://doi.org/10.1007/s00365-025-09718-3</a>.</p>
+<p class="reference-entry">Lanthaler, S., Mishra, S., &amp; Karniadakis, G. E. (2022). Error estimates for DeepONets: A deep learning framework in infinite dimensions. <em>Transactions of Mathematics and Its Applications, 6</em>(1), tnac001. <a href="https://doi.org/10.1093/imatrm/tnac001" target="_blank" rel="noopener">https://doi.org/10.1093/imatrm/tnac001</a>.</p>
+<p class="reference-entry">Lanthaler, S., Molinaro, R., Hadorn, P., &amp; Mishra, S. (2023). Nonlinear reconstruction for operator learning of PDEs with discontinuities. In <em>The Eleventh International Conference on Learning Representations</em>. <a href="https://openreview.net/forum?id=CrfhZAsJDsZ" target="_blank" rel="noopener">https://openreview.net/forum?id=CrfhZAsJDsZ</a>.</p>
+<p class="reference-entry">Li, Z., Kovachki, N., Azizzadenesheli, K., Liu, B., Bhattacharya, K., Stuart, A., &amp; Anandkumar, A. (2021). Fourier neural operator for parametric partial differential equations. In <em>International Conference on Learning Representations</em>. <a href="https://openreview.net/forum?id=c8P9NQVtmnO" target="_blank" rel="noopener">https://openreview.net/forum?id=c8P9NQVtmnO</a>.</p>
+<p class="reference-entry">Lu, L., Jin, P., Pang, G., Zhang, Z., &amp; Karniadakis, G. E. (2021). Learning nonlinear operators via DeepONet based on the universal approximation theorem of operators. <em>Nature Machine Intelligence, 3</em>(3), 218–229. <a href="https://doi.org/10.1038/s42256-021-00302-5" target="_blank" rel="noopener">https://doi.org/10.1038/s42256-021-00302-5</a>.</p>
+<p class="reference-entry">Petrova, G., &amp; Wojtaszczyk, P. (2023). Lipschitz widths. <em>Constructive Approximation, 57</em>(2), 759–805. <a href="https://doi.org/10.1007/s00365-022-09576-3" target="_blank" rel="noopener">https://doi.org/10.1007/s00365-022-09576-3</a>.</p>
+<p class="reference-entry">Seidman, J. H., Kissas, G., Perdikaris, P., &amp; Pappas, G. J. (2022). NOMAD: Nonlinear manifold decoders for operator learning. In <em>Advances in Neural Information Processing Systems</em> (Vol. 35, pp. 5601–5613). <a href="https://proceedings.neurips.cc/paper_files/paper/2022/hash/24f49b2ad9fbe65eefbfd99d6f6c3fd2-Abstract-Conference.html" target="_blank" rel="noopener">NeurIPS proceedings</a>.</p>
+<p class="reference-entry">Stuart, A. M., &amp; Trautner, M. (2026). <em>Enforcing Dirichlet boundary conditions in operator learning</em> [Preprint]. arXiv. <a href="https://doi.org/10.48550/arXiv.2608.27256" target="_blank" rel="noopener">https://doi.org/10.48550/arXiv.2608.27256</a>. The definition and equation numbers cited in Section 2.2 refer to version 1.</p>
+<h2 id="bibliographic-information">Bibliographic Information</h2>
+<pre><code class="language-bibtex">@misc{xie2026intrinsic,
+  author = {Xiaoyang Xie},
+  title  = {Range Geometry of Neural Operators},
+  year   = {2026},
+  note   = {Blog post},
+  url    = {https://xiaoyang-xie.github.io/posts/2026/09/range-geometry-neural-operators/}
+}</code></pre>
+<p>First published on September 8, 2026. <a href="https://github.com/Xiaoyang-Xie/Xiaoyang-Xie.github.io/releases/tag/range-geometry-v1.0" target="_blank" rel="noopener">Archived first release</a>.</p>
+      </article>
+    </main>
+
+    <aside class="toc" aria-label="Table of contents">
+      <p class="toc__title">On this page</p>
+      <a href="#dimensions" data-level="2">1. Three questions about an output set</a>
+<a href="#model-capacity" data-level="2">2. Expressive power of neural-operator architectures</a>
+<a href="#linear-readout" data-level="3">2.1 Fixed linear reconstruction: POD-Net and DeepONet</a>
+<a href="#nonlocal-readout" data-level="3">2.2 Nonlocal Readout Neural Operators</a>
+<a href="#adaptive-sparse" data-level="3">2.3 STFNO: a constructed example</a>
+<a href="#pointwise-path" data-level="3">2.4 General NNOs</a>
+<a href="#four-classes" data-level="2">3. Four geometries that separate the questions</a>
+<a href="#class-i" data-level="3">3.1 Class I: two coefficients are enough</a>
+<a href="#class-ii" data-level="3">3.2 Class II: one moving shape, infinitely many linear directions</a>
+<a href="#class-iii" data-level="3">3.3 Class III: one-dimensional pieces can be hard to organize</a>
+<a href="#class-iv" data-level="3">3.4 Class IV: many coordinates vary together</a>
+<a href="#model-geometry" data-level="3">3.5 Matching model capacity to the four geometries</a>
+<a href="#bbm" data-level="2">4. Numerical Experiments</a>
+<a href="#case-i-results" data-level="3">4.1 Case I: two independent coefficients</a>
+<a href="#case-ii-results" data-level="3">4.2 Case II: a translating pulse</a>
+<a href="#case-iii-results" data-level="3">4.3 Case III: one active Fourier mode per input</a>
+<a href="#case-iv-results" data-level="3">4.4 Case IV: many Fourier modes vary together</a>
+<a href="#conclusion" data-level="2">5. Conclusion</a>
+<a href="#related-work" data-level="2">References</a>
+<a href="#bibliographic-information" data-level="2">Bibliographic Information</a>
+    </aside>
+  </div>
+
+  <footer class="site-footer">
+    Content and original scientific figures © 2026 Xiaoyang Xie. <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.<br>
+    Xiaoyang Xie · First published September 8, 2026 · <a href="https://github.com/Xiaoyang-Xie/Xiaoyang-Xie.github.io/releases/tag/range-geometry-v1.0">First release</a>
+  </footer>
+
+  <script>
+    const tocLinks = [...document.querySelectorAll('.toc a')];
+    const targets = tocLinks.map(link => document.querySelector(link.getAttribute('href'))).filter(Boolean);
+    const observer = new IntersectionObserver(entries => {
+      const visible = entries.filter(entry => entry.isIntersecting).sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top)[0];
+      if (!visible) return;
+      tocLinks.forEach(link => link.classList.toggle('is-active', link.getAttribute('href') === '#' + visible.target.id));
+    }, { rootMargin: '-18% 0px -72% 0px', threshold: 0 });
+    targets.forEach(target => observer.observe(target));
+    window.addEventListener('load', () => {
+      const typeset = window.MathJax?.startup?.promise || Promise.resolve();
+      typeset.then(() => {
+        if (!window.location.hash) return;
+        const target = document.getElementById(decodeURIComponent(window.location.hash.slice(1)));
+        target?.scrollIntoView({ behavior: 'instant', block: 'start' });
+      });
+    });
+  </script>
+</body>
+</html>
+
+{% endraw %}
