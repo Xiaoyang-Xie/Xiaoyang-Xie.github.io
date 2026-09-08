@@ -425,7 +425,7 @@ Stuart, A. M., & Trautner, M. (2026). *Enforcing Dirichlet boundary conditions i
 ## Bibliographic Information
 
 ```bibtex
-@misc{xie2026intrinsic,
+@misc{xie2026range,
   author = {Xiaoyang Xie},
   title  = {Range Geometry of Neural Operators},
   year   = {2026},
